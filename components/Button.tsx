@@ -17,11 +17,11 @@ const Button: React.FC<ButtonProps> = ({
   variant = 'primary',
   fullWidth = false,
 }) => {
-  const baseClasses = "px-8 py-3 font-bold rounded-md text-center transition-all duration-300 transform focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-brand-dark";
+  const baseClasses = "px-8 py-3 font-bold rounded-md text-center transition-all duration-300 transform focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-background";
   
   const variantClasses = {
-    primary: "bg-brand-accent text-brand-dark hover:bg-white hover:shadow-lg focus:ring-brand-accent",
-    secondary: "bg-transparent border-2 border-brand-accent text-brand-accent hover:bg-brand-accent hover:text-brand-dark focus:ring-brand-accent",
+    primary: "bg-primary text-primary-foreground hover:shadow-lg focus:ring-primary",
+    secondary: "bg-transparent border-2 border-primary text-primary hover:bg-primary hover:text-primary-foreground focus:ring-primary",
   };
 
   const widthClass = fullWidth ? 'w-full' : 'w-auto';

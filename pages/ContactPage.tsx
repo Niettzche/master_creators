@@ -1,5 +1,6 @@
 
 import React from 'react';
+import { MagnetizeButton } from '@/components/ui/magnetize-button';
 
 const ContactPage: React.FC = () => {
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -10,50 +11,50 @@ const ContactPage: React.FC = () => {
   };
 
   return (
-    <div className="bg-brand-mid py-20 sm:py-28">
+    <div className="bg-background text-foreground py-20 sm:py-28">
       <div className="container mx-auto px-6">
         <div className="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
           <div className="text-center md:text-left">
-            <h1 className="text-4xl md:text-5xl font-bold text-white">Hablemos de tu operación.</h1>
-            <p className="mt-4 text-lg text-brand-text/80">
+            <h1 className="text-4xl md:text-5xl font-bold">Hablemos de tu operación.</h1>
+            <p className="mt-4 text-lg text-muted-foreground">
               Estamos listos para entender tus procesos y diseñar un plan de acción. Agenda una sesión de diagnóstico sin costo y sin compromiso.
             </p>
           </div>
-          <div className="bg-brand-dark p-8 rounded-lg shadow-2xl border border-brand-light/50">
+          <div className="bg-card p-8 rounded-lg shadow-xl border border-border">
             <form onSubmit={handleSubmit} className="space-y-6">
               <div>
-                <label htmlFor="name" className="block text-sm font-medium text-brand-text/90">Nombre</label>
-                <input type="text" name="name" id="name" required className="mt-1 block w-full bg-brand-mid border border-brand-light rounded-md p-3 text-white focus:ring-brand-accent focus:border-brand-accent" />
+                <label htmlFor="name" className="block text-sm font-medium text-muted-foreground">Nombre</label>
+                <input type="text" name="name" id="name" required className="mt-1 block w-full bg-secondary border border-border rounded-md p-3 text-foreground focus:ring-2 focus:ring-primary focus:border-primary" />
               </div>
               <div>
-                <label htmlFor="company" className="block text-sm font-medium text-brand-text/90">Empresa</label>
-                <input type="text" name="company" id="company" required className="mt-1 block w-full bg-brand-mid border border-brand-light rounded-md p-3 text-white focus:ring-brand-accent focus:border-brand-accent" />
+                <label htmlFor="company" className="block text-sm font-medium text-muted-foreground">Empresa</label>
+                <input type="text" name="company" id="company" required className="mt-1 block w-full bg-secondary border border-border rounded-md p-3 text-foreground focus:ring-2 focus:ring-primary focus:border-primary" />
               </div>
               <div>
-                <label htmlFor="email" className="block text-sm font-medium text-brand-text/90">Email</label>
-                <input type="email" name="email" id="email" required className="mt-1 block w-full bg-brand-mid border border-brand-light rounded-md p-3 text-white focus:ring-brand-accent focus:border-brand-accent" />
+                <label htmlFor="email" className="block text-sm font-medium text-muted-foreground">Email</label>
+                <input type="email" name="email" id="email" required className="mt-1 block w-full bg-secondary border border-border rounded-md p-3 text-foreground focus:ring-2 focus:ring-primary focus:border-primary" />
               </div>
               <div>
-                <label htmlFor="phone" className="block text-sm font-medium text-brand-text/90">Teléfono</label>
-                <input type="tel" name="phone" id="phone" className="mt-1 block w-full bg-brand-mid border border-brand-light rounded-md p-3 text-white focus:ring-brand-accent focus:border-brand-accent" />
+                <label htmlFor="phone" className="block text-sm font-medium text-muted-foreground">Teléfono</label>
+                <input type="tel" name="phone" id="phone" className="mt-1 block w-full bg-secondary border border-border rounded-md p-3 text-foreground focus:ring-2 focus:ring-primary focus:border-primary" />
               </div>
               <div>
-                <label htmlFor="message" className="block text-sm font-medium text-brand-text/90">Mensaje</label>
+                <label htmlFor="message" className="block text-sm font-medium text-muted-foreground">Mensaje</label>
                 <textarea 
                     name="message" 
                     id="message" 
                     rows={4} 
                     placeholder="Cuéntanos, ¿cuál es el proceso que más te duele hoy?"
-                    className="mt-1 block w-full bg-brand-mid border border-brand-light rounded-md p-3 text-white focus:ring-brand-accent focus:border-brand-accent placeholder:text-brand-text/50"
+                    className="mt-1 block w-full bg-secondary border border-border rounded-md p-3 text-foreground focus:ring-2 focus:ring-primary focus:border-primary placeholder:text-muted-foreground"
                 ></textarea>
               </div>
               <div>
-                <button 
-                  type="submit" 
-                  className="w-full px-8 py-3 font-bold rounded-md text-center transition-all duration-300 transform bg-brand-accent text-brand-dark hover:bg-white hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-brand-dark focus:ring-brand-accent"
+                <MagnetizeButton
+                  type="submit"
+                  className="w-full font-bold"
                 >
                   Solicitar Sesión de Diagnóstico
-                </button>
+                </MagnetizeButton>
               </div>
             </form>
           </div>

@@ -11,25 +11,25 @@ const LinkedInIcon = () => (
 
 const Footer: React.FC = () => {
   return (
-    <footer className="bg-brand-mid border-t border-brand-light">
+    <footer className="bg-secondary border-t border-border text-foreground">
       <div className="container mx-auto px-6 py-12">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           <div className="flex flex-col items-start">
              <Link to="/" className="flex items-center space-x-2 text-2xl font-bold mb-4">
                 <div className="flex space-x-1">
-                    <div className="w-3 h-8 bg-brand-accent"></div>
-                    <div className="w-3 h-8 bg-brand-light"></div>
+                    <div className="w-3 h-8 bg-primary"></div>
+                    <div className="w-3 h-8 bg-ring"></div>
                 </div>
                 <span>Master Creators</span>
             </Link>
-            <p className="text-brand-text/70">Innovación útil, tecnología humana.</p>
+            <p className="text-muted-foreground">Innovación útil, tecnología humana.</p>
           </div>
           <div>
-            <h3 className="text-lg font-semibold text-white mb-4">Navegación</h3>
+            <h3 className="text-lg font-semibold mb-4">Navegación</h3>
             <ul className="space-y-2">
               {navLinks.map((link) => (
                 <li key={link.path}>
-                  <Link to={link.path} className="text-brand-text/70 hover:text-brand-accent transition-colors duration-300">
+                  <Link to={link.path} className="text-muted-foreground hover:text-primary transition-colors duration-300">
                     {link.name}
                   </Link>
                 </li>
@@ -37,16 +37,16 @@ const Footer: React.FC = () => {
             </ul>
           </div>
           <div>
-            <h3 className="text-lg font-semibold text-white mb-4">Contacto</h3>
-            <p className="text-brand-text/70">diagnostico@mastercreators.com</p>
+            <h3 className="text-lg font-semibold mb-4">Contacto</h3>
+            <p className="text-muted-foreground">diagnostico@mastercreators.com</p>
             <div className="mt-4 flex space-x-4">
-              <a href="#" className="text-brand-text/70 hover:text-brand-accent transition-colors duration-300">
+              <a href="#" className="text-muted-foreground hover:text-primary transition-colors duration-300">
                 <LinkedInIcon />
               </a>
             </div>
           </div>
         </div>
-        <div className="mt-12 pt-8 border-t border-brand-light text-center text-brand-text/50">
+        <div className="mt-12 pt-8 border-t border-border text-center text-muted-foreground">
           &copy; {new Date().getFullYear()} Master Creators. Todos los derechos reservados.
         </div>
       </div>

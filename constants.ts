@@ -32,7 +32,7 @@ export const hybridStudioMix = [
     { name: 'Consultora Estratégica', percentage: 30, color: 'bg-blue-500' },
     { name: 'Oficina de Diseño de Procesos', percentage: 30, color: 'bg-sky-500' },
     { name: 'Estudio de Automatización', percentage: 20, color: 'bg-teal-500' },
-    { name: 'AI Lab', percentage: 20, color: 'bg-brand-accent' },
+    { name: 'AI Lab', percentage: 20, color: 'bg-primary' },
 ];
 
 export const services = [
