@@ -8,6 +8,16 @@ import {
   hybridStudioMix,
   services,
   differentiators,
+  heroFocuses,
+  innovationStudyIntro,
+  impactPillars,
+  whoWeAre,
+  purposeVision,
+  philosophyPrinciples,
+  selfViewStatements,
+  aiLabSteps,
+  aiLabMetrics,
+  insightHighlights,
 } from "../constants";
 
 const icons: { [key: string]: React.FC<{className: string}> } = {
@@ -37,14 +47,49 @@ const HomePage: React.FC = () => {
   return (
     <>
       <HeroGeometric
-        badge="Master Creators"
-        title1="Elevamos tu visión digital"
-        title2="con sistemas inteligentes"
+        badge="MASTERCREATORS"
+        title1="Applied innovation"
+        title2="for real impact"
+        description="Elevamos la operación de las empresas que ya están en marcha combinando estrategia, automatización e inteligencia artificial con ejecución impecable."
+        focusList={heroFocuses}
+        primaryCta={{
+          label: "Agendar sesión estratégica",
+          onClick: () => navigate("/contact"),
+        }}
+        secondaryCta={{
+          label: "Ver nuestros servicios",
+          onClick: () => navigate("/services"),
+        }}
       />
+
+      <Section id="somos" className="bg-secondary">
+        <div className="max-w-5xl mx-auto text-center space-y-6">
+          <p className="text-lg md:text-xl text-muted-foreground leading-relaxed">
+            {innovationStudyIntro}
+          </p>
+        </div>
+      </Section>
+
+      <Section>
+        <h2 className="text-3xl md:text-4xl font-bold text-center mb-12">
+          Cómo generamos impacto
+        </h2>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          {impactPillars.map((pillar) => (
+            <div
+              key={pillar.title}
+              className="bg-card p-8 rounded-lg border border-border shadow-sm"
+            >
+              <h3 className="text-2xl font-semibold mb-3">{pillar.title}</h3>
+              <p className="text-muted-foreground">{pillar.description}</p>
+            </div>
+          ))}
+        </div>
+      </Section>
 
       {/* Pain Section */}
       <Section className="bg-muted">
-        <h2 className="text-3xl md:text-4xl font-bold text-center mb-12 text-foreground">¿Tu operación se siente así?</h2>
+        <h2 className="text-3xl md:text-4xl font-bold text-center mb-12 text-foreground">Los dolores reales que resolvemos</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {painPoints.map((point) => {
             const Icon = icons[point.icon];
@@ -61,7 +106,7 @@ const HomePage: React.FC = () => {
         </div>
       </Section>
 
-      {/* Solution Section */}
+      {/* Hybrid Section */}
       <Section>
           <div className="text-center">
             <h2 className="text-3xl md:text-4xl font-bold">No somos una consultora tradicional.</h2>
@@ -70,12 +115,21 @@ const HomePage: React.FC = () => {
           <div className="max-w-4xl mx-auto mt-12">
             <div className="bg-card border border-border p-8 rounded-lg shadow-xl">
               <div className="flex flex-col md:flex-row w-full rounded-lg overflow-hidden">
-                {hybridStudioMix.map((mix, index) => (
-                  <div key={mix.name} className={`${mix.color} p-4 text-center text-white font-bold flex flex-col justify-center`} style={{ width: `${mix.percentage}%` }}>
-                    <span className="text-2xl">{mix.percentage}%</span>
-                    <span className="text-xs md:text-sm">{mix.name}</span>
-                  </div>
-                ))}
+                {hybridStudioMix.map((mix, index) => {
+                  const isLastItem = index === hybridStudioMix.length - 1;
+                  return (
+                    <div
+                      key={mix.name}
+                      className={`${mix.color} p-4 text-center text-white font-bold flex flex-col justify-center ${
+                        isLastItem ? "dark:text-gray-900" : ""
+                      }`}
+                      style={{ width: `${mix.percentage}%` }}
+                    >
+                      <span className="text-2xl">{mix.percentage}%</span>
+                      <span className="text-xs md:text-sm">{mix.name}</span>
+                    </div>
+                  );
+                })}
               </div>
             </div>
           </div>
@@ -119,18 +173,124 @@ const HomePage: React.FC = () => {
         </div>
       </Section>
 
+      <Section>
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+          <div>
+            <h2 className="text-3xl font-bold mb-6">Quiénes somos</h2>
+            <div className="space-y-4 text-muted-foreground">
+              {whoWeAre.paragraphs.map((paragraph, index) => (
+                <p key={index}>{paragraph}</p>
+              ))}
+            </div>
+          </div>
+          <div className="bg-card border border-border rounded-lg p-8 space-y-6">
+            <div>
+              <h3 className="text-xl font-semibold mb-2">Nuestro propósito</h3>
+              <p className="text-muted-foreground">{purposeVision.purpose}</p>
+            </div>
+            <div>
+              <h3 className="text-xl font-semibold mb-2">Nuestra visión</h3>
+              <p className="text-muted-foreground">{purposeVision.vision}</p>
+            </div>
+          </div>
+        </div>
+      </Section>
+
+      <Section className="bg-muted">
+        <h2 className="text-3xl md:text-4xl font-bold text-center mb-12">Nuestra filosofía</h2>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          {philosophyPrinciples.map((principle) => (
+            <div key={principle.title} className="bg-card border border-border rounded-lg p-6 shadow-sm">
+              <h3 className="text-xl font-semibold mb-2">{principle.title}</h3>
+              <p className="text-muted-foreground">{principle.description}</p>
+            </div>
+          ))}
+        </div>
+      </Section>
+
+      <Section>
+        <h2 className="text-3xl md:text-4xl font-bold text-center mb-8">Cómo nos vemos a nosotros mismos</h2>
+        <div className="space-y-4 max-w-4xl mx-auto text-center text-muted-foreground">
+          {selfViewStatements.map((statement, index) => (
+            <p key={index} className="text-lg">{statement}</p>
+          ))}
+        </div>
+      </Section>
+
+      <Section className="bg-secondary">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+          <div>
+            <p className="uppercase text-sm tracking-[0.4em] text-muted-foreground mb-3">Master Creators AI Lab</p>
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">Experimentación con IA aplicada</h2>
+            <p className="text-muted-foreground mb-6">
+              Diseñamos, prototipamos y validamos agentes virtuales y micro-soluciones especializadas que prueban valor en semanas antes de escalar.
+            </p>
+            <div className="space-y-4">
+              {aiLabSteps.slice(0, 3).map((step) => (
+                <div key={step.title}>
+                  <h3 className="text-xl font-semibold">{step.title}</h3>
+                  <p className="text-muted-foreground">{step.description}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+          <div className="bg-card border border-border rounded-lg p-8">
+            <h3 className="text-xl font-semibold mb-4">Iteramos hasta que haya valor</h3>
+            <ul className="space-y-4">
+              {aiLabSteps.slice(3).map((step) => (
+                <li key={step.title}>
+                  <p className="font-semibold">{step.title}</p>
+                  <p className="text-muted-foreground">{step.description}</p>
+                </li>
+              ))}
+            </ul>
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-6">
+              {aiLabMetrics.map((metric) => (
+                <div key={metric.metric} className="text-center border border-border rounded-lg p-4">
+                  <p className="text-3xl font-bold text-primary">{metric.metric}</p>
+                  <p className="text-sm text-muted-foreground mt-1">{metric.description}</p>
+                </div>
+              ))}
+            </div>
+            <div className="mt-8 text-center">
+              <MagnetizeButton
+                className="font-semibold"
+                onClick={() => navigate("/services")}
+              >
+                Explorar el AI Lab
+              </MagnetizeButton>
+            </div>
+          </div>
+        </div>
+      </Section>
+
+      <Section id="insights" className="bg-muted">
+        <h2 className="text-3xl md:text-4xl font-bold text-center mb-12">Insights que compartimos</h2>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          {insightHighlights.map((insight) => (
+            <div key={insight.title} className="bg-card border border-border rounded-lg p-6">
+              <h3 className="text-xl font-semibold mb-2">{insight.title}</h3>
+              <p className="text-muted-foreground">{insight.description}</p>
+            </div>
+          ))}
+        </div>
+        <p className="text-center text-muted-foreground mt-8">
+          Próximamente publicaremos nuevas guías, casos y aprendizajes accionables.
+        </p>
+      </Section>
+
       {/* Final CTA */}
       <Section className="text-center bg-secondary">
-        <h2 className="text-3xl md:text-4xl font-bold">Deja de operar "como siempre".</h2>
+        <h2 className="text-3xl md:text-4xl font-bold">Sesión estratégica de 45 minutos.</h2>
         <p className="mt-4 text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto">
-            Descubre cómo la innovación aplicada puede cambiar el rumbo de tu operación.
+            Revisamos tu contexto, identificamos 2-3 oportunidades de mejora inmediata y te proponemos las primeras líneas de acción sin compromiso.
         </p>
         <div className="mt-8 flex justify-center">
           <MagnetizeButton
             className="px-8 py-3 font-semibold"
             onClick={() => navigate("/contact")}
           >
-            Inicia tu Diagnóstico Operativo
+            Agendar sesión estratégica
           </MagnetizeButton>
         </div>
       </Section>

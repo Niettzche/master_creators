@@ -3,14 +3,19 @@ import { Link, NavLink } from "react-router-dom";
 import { Menu, X } from "lucide-react";
 import { navLinks } from "../constants";
 import Button from "./Button";
+import logoImage from "../dist/assets/logo.png";
 
 const Logo: React.FC = () => (
   <Link
     to="/"
     className="flex items-center space-x-3 text-xl md:text-2xl font-semibold tracking-tight text-white"
   >
-    <div className="flex items-center justify-center h-10 w-10 rounded-full bg-white/10 border border-white/15">
-      <div className="h-2 w-8 rounded-full bg-gradient-to-r from-indigo-400 to-rose-400" />
+    <div className="h-10 w-10 rounded-full border border-white/15 bg-white/5 overflow-hidden">
+      <img
+        src={logoImage}
+        alt="Master Creators logo"
+        className="h-full w-full object-cover"
+      />
     </div>
     <span className="uppercase text-xs tracking-[0.4em] text-white/70">Master Creators</span>
   </Link>

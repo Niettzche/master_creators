@@ -72,16 +72,29 @@ function ElegantShape({
   );
 }
 
+type HeroCta = {
+  label: string;
+  onClick?: () => void;
+};
+
 type HeroGeometricProps = {
   badge?: string;
   title1?: string;
   title2?: string;
+  description?: string;
+  focusList?: string[];
+  primaryCta?: HeroCta;
+  secondaryCta?: HeroCta;
 };
 
 function HeroGeometric({
   badge = "Design Collective",
   title1 = "Elevate Your Digital Vision",
   title2 = "Crafting Exceptional Websites",
+  description = "Innovation-driven experiences to push your product forward.",
+  focusList = [],
+  primaryCta,
+  secondaryCta,
 }: HeroGeometricProps) {
   const fadeUpVariants = {
     hidden: { opacity: 0, y: 30 },
@@ -187,11 +200,56 @@ function HeroGeometric({
             initial="hidden"
             animate="visible"
           >
-            <p className="text-base sm:text-lg md:text-xl text-white/40 mb-8 leading-relaxed font-light tracking-wide max-w-xl mx-auto px-4">
-              Crafting exceptional digital experiences through innovative design
-              and cutting-edge technology.
+            <p className="text-base sm:text-lg md:text-xl text-white/60 mb-8 leading-relaxed font-light tracking-wide max-w-2xl mx-auto px-4">
+              {description}
             </p>
           </motion.div>
+
+          {!!focusList.length && (
+            <motion.div
+              custom={3}
+              variants={fadeUpVariants}
+              initial="hidden"
+              animate="visible"
+              className="flex flex-wrap justify-center gap-3 mb-10 md:mb-12"
+            >
+              {focusList.map((item) => (
+                <span
+                  key={item}
+                  className="px-4 py-2 rounded-full border border-white/15 bg-white/[0.04] text-xs md:text-sm uppercase tracking-wide text-white/70"
+                >
+                  {item}
+                </span>
+              ))}
+            </motion.div>
+          )}
+
+          {(primaryCta || secondaryCta) && (
+            <motion.div
+              custom={4}
+              variants={fadeUpVariants}
+              initial="hidden"
+              animate="visible"
+              className="flex flex-col sm:flex-row items-center justify-center gap-4"
+            >
+              {primaryCta && (
+                <button
+                  onClick={primaryCta.onClick}
+                  className="px-8 py-3 rounded-full bg-white text-black font-semibold tracking-wide hover:opacity-90 transition"
+                >
+                  {primaryCta.label}
+                </button>
+              )}
+              {secondaryCta && (
+                <button
+                  onClick={secondaryCta.onClick}
+                  className="px-8 py-3 rounded-full border border-white/30 text-white/80 font-semibold tracking-wide hover:bg-white/10 transition"
+                >
+                  {secondaryCta.label}
+                </button>
+              )}
+            </motion.div>
+          )}
         </div>
       </div>
 

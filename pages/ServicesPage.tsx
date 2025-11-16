@@ -1,5 +1,6 @@
 
 import React, { useState } from 'react';
+import { WavyBlock, WavyBlockItem } from '@/components/ui/wavy-text-block';
 import { services } from '../constants';
 import Button from '../components/Button';
 
@@ -14,6 +15,18 @@ const ServicesPage: React.FC = () => {
           <p className="mt-4 text-lg text-muted-foreground max-w-3xl mx-auto">
             Nuestros servicios son modulares y se adaptan a tus necesidades, desde el diagnóstico hasta la implementación y adopción.
           </p>
+        </div>
+
+        <div className="overflow-hidden mb-16">
+          <WavyBlock className="flex flex-col gap-4">
+            {["Innovation", "Automation", "Academy", "AI Lab"].map((label, index) => (
+              <WavyBlockItem key={label} index={index}>
+                <h2 className="text-5xl md:text-7xl font-bold uppercase tracking-tighter whitespace-nowrap">
+                  {label}
+                </h2>
+              </WavyBlockItem>
+            ))}
+          </WavyBlock>
         </div>
 
         <div className="flex flex-col md:flex-row gap-8">
@@ -43,19 +56,47 @@ const ServicesPage: React.FC = () => {
                   key={index}
                   className={`${activeTab === index ? 'block' : 'hidden'}`}
                 >
-                  <h2 className="text-3xl font-bold text-primary mb-4">{service.title}</h2>
+                  <h2 className="text-3xl font-bold text-primary mb-2">{service.title}</h2>
+                  <p className="text-lg text-muted-foreground font-semibold mb-4">{service.shortDescription}</p>
                   <p className="text-lg text-muted-foreground font-light mb-6">{service.fullDescription}</p>
 
-                  <h3 className="text-xl font-semibold mb-3">Componentes Clave:</h3>
-                  <ul className="list-disc list-inside space-y-2 mb-6 text-muted-foreground">
-                    {service.components.map((component, i) => (
-                      <li key={i}>{component}</li>
-                    ))}
-                  </ul>
+                  <div className="space-y-6">
+                    <div>
+                      <h3 className="text-xl font-semibold mb-3">Qué incluye</h3>
+                      <ul className="list-disc list-inside space-y-2 text-muted-foreground">
+                        {service.includes.map((item, i) => (
+                          <li key={i}>{item}</li>
+                        ))}
+                      </ul>
+                    </div>
 
-                  <div className="bg-secondary p-4 rounded-md border-l-4 border-primary">
-                    <h3 className="text-lg font-semibold mb-1">Valor para tu Empresa:</h3>
-                    <p className="text-muted-foreground italic">"{service.value}"</p>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                      <div>
+                        <h3 className="text-xl font-semibold mb-3">Para quién es</h3>
+                        <ul className="list-disc list-inside space-y-2 text-muted-foreground">
+                          {service.forWhom.map((item, i) => (
+                            <li key={i}>{item}</li>
+                          ))}
+                        </ul>
+                      </div>
+                      <div>
+                        <h3 className="text-xl font-semibold mb-3">Qué se lleva el cliente</h3>
+                        <ul className="list-disc list-inside space-y-2 text-muted-foreground">
+                          {service.clientGets.map((item, i) => (
+                            <li key={i}>{item}</li>
+                          ))}
+                        </ul>
+                      </div>
+                    </div>
+
+                    <div className="bg-secondary p-4 rounded-md border border-border">
+                      <p className="text-muted-foreground">
+                        <span className="font-semibold text-foreground">Duración típica:</span> {service.duration}
+                      </p>
+                      <p className="text-muted-foreground mt-2">
+                        <span className="font-semibold text-foreground">Inversión:</span> {service.investment}
+                      </p>
+                    </div>
                   </div>
                 </div>
               ))}

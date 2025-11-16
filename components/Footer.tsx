@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { navLinks } from '../constants';
+import { navLinks, services } from '../constants';
 
 const LinkedInIcon = () => (
     <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
@@ -13,7 +13,7 @@ const Footer: React.FC = () => {
   return (
     <footer className="bg-secondary border-t border-border text-foreground">
       <div className="container mx-auto px-6 py-12">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           <div className="flex flex-col items-start">
              <Link to="/" className="flex items-center space-x-2 text-2xl font-bold mb-4">
                 <div className="flex space-x-1">
@@ -25,7 +25,19 @@ const Footer: React.FC = () => {
             <p className="text-muted-foreground">Innovación útil, tecnología humana.</p>
           </div>
           <div>
-            <h3 className="text-lg font-semibold mb-4">Navegación</h3>
+            <h3 className="text-lg font-semibold mb-4">Servicios</h3>
+            <ul className="space-y-2">
+              {services.map((service) => (
+                <li key={service.title}>
+                  <Link to="/services" className="text-muted-foreground hover:text-primary transition-colors duration-300">
+                    {service.title}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div>
+            <h3 className="text-lg font-semibold mb-4">Empresa</h3>
             <ul className="space-y-2">
               {navLinks.map((link) => (
                 <li key={link.path}>
@@ -38,10 +50,24 @@ const Footer: React.FC = () => {
           </div>
           <div>
             <h3 className="text-lg font-semibold mb-4">Contacto</h3>
-            <p className="text-muted-foreground">diagnostico@mastercreators.com</p>
+            <p className="text-muted-foreground">contacto@mastercreators.mx</p>
+            <p className="text-muted-foreground">Tiempo de respuesta &lt; 24 hrs hábiles</p>
             <div className="mt-4 flex space-x-4">
-              <a href="#" className="text-muted-foreground hover:text-primary transition-colors duration-300">
+              <a
+                href="https://www.linkedin.com/company/master-creators"
+                target="_blank"
+                rel="noreferrer"
+                className="text-muted-foreground hover:text-primary transition-colors duration-300"
+              >
                 <LinkedInIcon />
+              </a>
+            </div>
+            <div className="mt-4 space-y-2">
+              <a href="#" className="text-sm text-muted-foreground hover:text-primary transition-colors duration-300">
+                Aviso de privacidad
+              </a>
+              <a href="#" className="text-sm text-muted-foreground hover:text-primary transition-colors duration-300">
+                Términos y condiciones
               </a>
             </div>
           </div>
