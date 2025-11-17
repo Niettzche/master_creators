@@ -4,11 +4,73 @@ import { motion } from 'framer-motion';
 import { MagnetizeButton } from '@/components/ui/magnetize-button';
 
 const ContactPage: React.FC = () => {
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const [isSubmitting, setIsSubmitting] = React.useState(false);
+  const [feedback, setFeedback] = React.useState<{ type: 'success' | 'error'; message: string } | null>(null);
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    // Here you would handle form submission, e.g., send data to an API
-    alert('Gracias por tu mensaje. Nos pondremos en contacto contigo pronto.');
-    (e.target as HTMLFormElement).reset();
+    setFeedback(null);
+
+    const form = e.currentTarget;
+    const formData = new FormData(form);
+    const getValue = (field: string) => {
+      const value = formData.get(field);
+      return typeof value === 'string' ? value.trim() : '';
+    };
+
+    const payload: {
+      full_name: string;
+      company: string;
+      role_title: string;
+      email: string;
+      phone?: string;
+      context_summary: string;
+      main_pain: string;
+      motivation: string;
+    } = {
+      full_name: getValue('name'),
+      company: getValue('company'),
+      role_title: getValue('role'),
+      email: getValue('email'),
+      context_summary: getValue('context'),
+      main_pain: getValue('main-pain'),
+      motivation: getValue('motivation'),
+    };
+
+    const phone = getValue('phone');
+    if (phone) {
+      payload.phone = phone;
+    }
+
+    setIsSubmitting(true);
+
+    try {
+      const response = await fetch('http://127.0.0.1:5000/api/diagnostic-requests', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(payload),
+      });
+
+      if (!response.ok) {
+        throw new Error(`Request failed with status ${response.status}`);
+      }
+
+      setFeedback({
+        type: 'success',
+        message: 'Gracias por tu mensaje. Nos pondremos en contacto contigo pronto.',
+      });
+      form.reset();
+    } catch (error) {
+      console.error('Error submitting contact form:', error);
+      setFeedback({
+        type: 'error',
+        message: 'No pudimos enviar tu información. Intenta nuevamente en unos minutos.',
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -29,6 +91,15 @@ const ContactPage: React.FC = () => {
           </div>
           <div className="bg-card p-8 rounded-lg shadow-xl border border-border">
             <form onSubmit={handleSubmit} className="space-y-6">
+              {feedback && (
+                <p
+                  className={`text-sm font-medium ${
+                    feedback.type === 'success' ? 'text-green-500' : 'text-red-500'
+                  }`}
+                >
+                  {feedback.message}
+                </p>
+              )}
               <div>
                 <label htmlFor="name" className="block text-sm font-medium text-muted-foreground">Nombre</label>
                 <input type="text" name="name" id="name" required className="mt-1 block w-full bg-secondary border border-border rounded-md p-3 text-foreground focus:ring-2 focus:ring-primary focus:border-primary" />
@@ -86,8 +157,9 @@ const ContactPage: React.FC = () => {
                 <MagnetizeButton
                   type="submit"
                   className="w-full font-bold"
+                  disabled={isSubmitting}
                 >
-                  Solicitar Sesión de Diagnóstico
+                  {isSubmitting ? 'Enviando...' : 'Solicitar Sesión de Diagnóstico'}
                 </MagnetizeButton>
               </div>
             </form>
