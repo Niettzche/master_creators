@@ -3,7 +3,7 @@ import { Link, NavLink } from "react-router-dom";
 import { Menu, X } from "lucide-react";
 import { navLinks } from "../constants";
 import Button from "./Button";
-import logoImage from "../dist/assets/logo.png";
+import logoImage from "../logo.png";
 
 const Logo: React.FC = () => (
   <Link
