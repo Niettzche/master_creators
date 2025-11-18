@@ -45,7 +45,7 @@ const ContactPage: React.FC = () => {
     setIsSubmitting(true);
 
     try {
-      const response = await fetch('http://127.0.0.1:5000/api/diagnostic-requests', {
+      const response = await fetch('/api/forms/api/diagnostic-requests', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
